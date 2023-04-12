@@ -1,7 +1,7 @@
 # wodo_CNNs_Machine_vision
 Deploy CNNs model with four FLIR camera synchronously streaming target image
 
-it's an automatic optical inspection application for detecting bad part of LED bulb, using private multilayer Convolutional Neural Networks (CNNs) to train and deploy inferencing task; of course it can be used for other small parts inspection too, it depend on what cnn model you are going to train and deploy.
+it's an automatic optical inspection ![application](https://github.com/phengxu/wodo_CNNs_Machine_vision/blob/main/data/icons/IMG_0746.JPG) for detecting bad part of LED bulb, using private multilayer Convolutional Neural Networks (CNNs) to train and deploy inferencing task; of course it can be used for other small parts inspection too, it depend on what cnn model you are going to train and deploy.
 
 the application streaming image from four 5M pixel resolution FLIR machine vison camera/ model bfs-pge-50s5m-c with ethernet connection. the entire source code had compiled and run on real prodution enviornment for half year, was proved that it can run smoothly and stable on window platform with high performance, can inspecitng targets with speed 7K per hour.
 
