@@ -1,0 +1,31 @@
+{
+  "info": {
+    "com": "somecompany",
+    "p/n": "201906001"
+  },
+
+  "active_cam": {
+    "cam_code": "B"
+  },
+  "cam_mode": {
+    "a": "",
+    "b": "p",
+    "c": "",
+    "d": ""
+  },
+  "target": {
+    "target_size": 20,
+    "batch_size": 5,
+    "image": "d:\\wodo\\icons\\img.png"
+  },
+  "model": "new_model_1c_gpu.h5",
+  "predict": {
+    "threshold": {
+      "a": 0.20,
+      "b": 2.366,
+      "c": 0.001,
+      "d": 0.001
+    }
+  }
+  
+}

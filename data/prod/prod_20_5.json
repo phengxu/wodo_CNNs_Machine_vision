@@ -1,0 +1,36 @@
+{
+  "info": {
+    "com": "somecompany",
+    "p/n": "201906001"
+  },
+
+  "active_cam": {
+    "cam_code": "BCD"
+  },
+  "cam_mode": {
+    "a": "",
+    "b": "p",
+    "c": "p",
+    "d": "p"
+  },
+  "target": {
+    "target_size": 20,
+    "batch_size": 5,
+    "image": "d:\\wodo\\icons\\img.png"
+  },
+  "model": {
+    "a": "Model_113.h5",
+    "b": "Model_113.h5",
+    "c": "Model_113.h5",
+    "d": "Model_113.h5"
+  },
+  "predict": {
+    "threshold": {
+      "a": 0.20,
+      "b": 0.0000000001,
+      "c": 0.001,
+      "d": 0.001
+    }
+  }
+  
+}

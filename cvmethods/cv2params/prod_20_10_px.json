@@ -1,0 +1,19 @@
+{
+  "params": {
+    "metric_ratio": 0.1,
+    "hough_circle": {
+      "mindist": 20,
+      "param1": 50,
+      "param2": 120,
+      "minradius": 80,
+      "maxradius": 180
+    },
+    "template_scale": {
+      "minscale": 0.9,
+      "maxscale": 3,
+      "number_of_template": 8
+    },
+    "diameter": 5.0,
+    "threshold": 1.0
+  }
+}

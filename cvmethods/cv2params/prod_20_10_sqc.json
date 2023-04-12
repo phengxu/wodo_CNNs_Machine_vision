@@ -1,0 +1,8 @@
+{
+    "params": {
+        "metric_ratio": 0.1,
+
+        "width": 5.0,
+        "threshold": 1.0
+    }
+}

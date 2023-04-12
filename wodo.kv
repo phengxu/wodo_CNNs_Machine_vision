@@ -1,0 +1,323 @@
+#: kivy 1.11.1
+#: import ScreenManager kivy.uix.screenmanager.ScreenManager
+#: import Screen kivy.uix.screenmanager.ScreenManager
+#: import ToggleButton kivy.uix.togglebutton
+#: import Slider kivy.uix.slider
+#: import thresholda config
+#: import comport config
+#: import datetime datetime
+#: import Factory kivy.factory.Factory
+# <CalibratePop>
+#     id: camera_image_popup
+#     title: ''
+#     auto_dismiss: False
+
+# ########    color template #############
+# <BackgroundColor@Widget>
+#     background_color: 1, 1, 1, 1
+#     canvas.before:
+#         Color:
+#             rgba: root.background_color
+#         Rectangle:
+#             size: self.size
+#             pos: self.pos
+
+# <BackColorLabel@Label+BackgroundColor>
+#     background_color: 128/255, 195/255, 92/255, .5
+
+# <BackcolorButton@Button+BackgroundColor>
+#     background_color: 228/255, 140/255, 46/255,.5
+
+# <ThrLabel@Label>
+#     size_hint: 0.1, 1
+#     font_size: 22
+#     bold: True
+#     color: 138/255,0,0,1
+# <ThrUpdatTextLabel@Label>
+#     size_hint: .2,1
+#     color: 0,0,0,1
+######################################
+########## MAIN SCREEN ###############
+######################################
+<MenuScreen>:
+    btn_trigger_test_signal: trigger_signal
+    qtbtn: quitbtn
+    rbtbtn: reboot_btn
+    btncalia: btn_cali_a
+    btncalib: btn_cali_b
+    btncalic: btn_cali_c
+    btncalid: btn_cali_d
+    # circlepro: circle_progress
+    grapha: grapha
+    graphb: graphb
+    graphc: graphc
+    graphd: graphd
+    name: 'mainwindow'
+    timecount: timecount
+    # max_sample_slider:max_sample_slider
+    # progressbox: progressbox
+    startwork: startwork
+    # cameranum: cameranum
+    start_cam_usb: start_cam_usb
+    target_size: target_size
+    # startcom: start_\com
+    modelsprofiles:modelsprofiles
+    # cameraserial: cameraserial
+    camera_a_frame_rate:camera_a_frame_rate
+    camera_b_frame_rate:camera_b_frame_rate
+    camera_c_frame_rate:camera_c_frame_rate
+    camera_d_frame_rate:camera_d_frame_rate
+    id: main
+   
+    BoxLayout: # root box 
+        id : b1
+        name: 'mian box'
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 21/255,34/255,106/255,1
+            Rectangle:
+                size: self.size # part 1 , target image and tag
+        BoxLayout: # target image display area
+            id: b2
+            name: 'sub_box_part_one'
+            orientation: 'vertical'
+            size_hint: 1, .7
+            # background_color : 21/255,34/255,106/255,1
+            TargetImages:
+                # size_hint: 1, .7
+                id: target_imgs
+                # source: 'd:\wodo\icons\wood.jpg'
+                allow_stretch: True
+                # size_hint_y: None
+                pos_hint:{"center_x":0.5,"center_y":1}
+                height: dp(500)
+              
+                
+        BoxLayout:# main operation buttons
+            orientation: 'horizontal'
+            size_hint: 1, 0.1
+            Button:
+                id: start_cam_usb
+                size_hint: .11, 1
+                #text: "相机"
+                font_size: 28
+                bold: True
+                background_normal: './data/icons/camera_disable_normal.png'
+                background_disabel_down: './data/icons/camera_disable_down.png'
+                background_down:'./data/icons/camera_disable_down.png'
+                background_disabel_normal: './data/icons/camera_disable_normal.png'
+                #background_color: (0,0,1/2,.8)
+                disabled: False
+                on_press: app.start_camera_usb()
+                on_release: self.background_normal = './data/icons/camera_normal.png'
+           
+            Button:
+                size_hint: None, 1
+                id: startwork
+                size_hint: .11,1
+                
+                #text: u'联机'
+                #font_name: chr_font_path
+                font_size: 28
+                bold: True
+                disabled: False
+                background_disable_normal: './data/icons/usb_disable_normal.png'
+                background_disabel_down: './data/icons/usb_disable_down.png'
+                background_down:'./data/icons/usb_down.png'
+                background_normal: './data/icons/usb_normal.png'
+                #background_color: (0,0,1,1)
+                on_press: app.start_working()
+            BoxLayout: # TIME AND COUNTER
+                orientation: 'vertical'
+                id: timecount
+                size_hint: 0.45, 1
+                # Label:
+                #     id: cameranum
+                #     bold: True
+                #     font_size: 28
+                #     color: 0,0,0,0
+                #     #background_color: 1,0,0,1
+                #     text: ''
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 0.6
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            Label:
+                id: target_size
+                text: ''
+                #size_hint: 0.1,None
+                font_size: 60
+                color: 255,255,255,0.8
+                bold: True
+                size_hint: 0.1 ,1
+                canvas.before:
+                    Color:
+                        rgba: 1, 0, 0, .8
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            Button:
+                id: trigger_signal
+                size_hint: .15, 1
+                font_size: 28
+                text:"镜头测试"
+                on_press: app.test_send_usb_drive_code()#app.alerting('alerting test') # part 2, work switch and start com
+            Button:
+                id: reboot_btn
+                disabled: True
+                size_hint: .15, 1
+                font_size: 28
+                text:"重启"
+                on_press: app.reboot()
+            TrainButton: # working mode switch
+                size_hint: 0.25,1
+                # pos_hint:{'x':.5,'y':.4}
+                # btn_st: btn_st
+                id: trainbtn
+                # image: self.source
+                padding: (10,10)
+                text:  self.text
+                background_color: self.background_color
+            PauseButton: # stop read usb command from plc
+                size_hint: .11,1
+                text: self.text
+                background_color: self.background_color
+            TriggerOnOffButton: # control toggle camera hard triggle setting
+                size_hint: .18,1
+                text: self.text
+                background_color: self.background_color
+            
+            Button: # btton quit
+                id: quitbtn
+                size_hint: 0.10,1
+                padding: (10,10)
+                disabled: True
+                text: '关闭'
+                font_size: 28
+                on_press: app.stop() # comport and exit button # bottom box
+        BoxLayout: # graph, camera, prod profiles
+            size_hint: 1, .2
+            orientation: 'horizontal'
+            
+            BoxLayout: # calibarate btn and profile of pord list
+                orientation: 'vertical'
+                size_hint: 0.2, 1
+                BoxLayout: # calibrate camera
+                    orientation: 'horizontal'
+                    size_hint: 1,0.3
+                    BoxLayout: # camera a
+                        orientation:'vertical'
+                        Button:
+                            id: btn_cali_a
+                            padding: (10,10)
+                            text: '--'
+                            font_size: 38
+                            background_color: (1.0, 0.0, 0.0, 1.0)
+                            disabled: True
+                            on_press:app.showCameraImage('相机 A 校准','cam0')
+                        Label:
+                            id: camera_a_frame_rate
+                            size_hint: 1, 0.5
+                            color: 0,0,0,1
+                            canvas.before:
+                                Color:
+                                    rgba: 53/255, 84/255, 44/255, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                    BoxLayout: # camera b
+                        orientation: 'vertical'
+                        Button:
+                            id: btn_cali_b
+                            padding: (10,10)
+                            text: 'B'
+                            font_size: 38
+                            # size_hint: 0.8,None
+                            # background_normal: './data/icons/cam_pos_b.png'
+                            # background_disable_normal: './data/icons/cam_pos_b.png'
+                            background_color: (1.0, 0.1, 0.0, 1.0)
+                            disabled: True
+                            on_press:app.showCameraImage('相机 B 校准','cam1')
+                        Label:
+                            id: camera_b_frame_rate
+                            size_hint: 1, 0.5
+                            color: 255,255,255,1
+                            canvas.before:
+                                Color:
+                                    rgba: 150/255, 41/255, 77/255, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                    BoxLayout: # camera c
+                        orientation: 'vertical'
+                        Button:
+                            id: btn_cali_c
+                            padding: (10,10)
+                            text: 'C'
+                            font_size: 38
+                            background_color: (1.0, 0.0, 0.0, 1.0)
+                            disabled: True
+                            on_press: app.showCameraImage('相机 C 校准','cam2')
+                        Label:
+                            id: camera_c_frame_rate
+                            size_hint: 1, 0.5
+                            color: 0,0,0,1
+                            canvas.before:
+                                Color:
+                                    rgba: 119/255, 210/255, 117/255, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                    BoxLayout: # camera d
+                        orientation: 'vertical'
+                        Button:
+                            id: btn_cali_d
+                            padding: (10,10)
+                            text: 'D'
+                            font_size: 38
+                            bold: True
+                            background_color: (0.0, 0.0, 1.0, 1.0)
+                            disabled: True
+                            on_press: app.showCameraImage('相机 D 校准','cam3')
+                        Label:
+                            id: camera_d_frame_rate
+                            size_hint: 1, 0.5
+                            color: 0,0,0,1
+                            canvas.before:
+                                Color:
+                                    rgba: 63/255, 66/255, 194/255, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                BoxLayout: # prod profile drop list
+                    orientation: "horizontal"
+                    size_hint: 1,.7
+                    id: modelsprofiles
+            BoxLayout: # statiscic graph table
+                orientation: 'horizontal'
+                size_hint: 0.8, 1
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                BoxLayout:
+                    Image:
+                        # source: self.source#r"d:\\wodo\\myfirst.png"
+                        id: grapha
+                BoxLayout:
+                    Image:
+                        source: self.source#r"d:\\wodo\\myfirst.png"
+                        id: graphb
+                BoxLayout:
+                    Image:
+                        source: self.source#r"d:\\wodo\\myfirst.png"
+                        id: graphc
+                BoxLayout:
+                    Image:
+                        source: self.source#r"d:\\wodo\\myfirst.png"
+                        id: graphd
